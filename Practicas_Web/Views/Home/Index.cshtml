@@ -1,0 +1,217 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+    <h1>Ingreso de datos</h1>
+    <div class="container">
+      <form id="form">
+        <div class="form-row">
+          <div class="col-md-4 mb-3">
+            <label>Nombre</label>
+            <input id="nombre" type="text" class="form-control" placeholder="Nombre"
+            value="">
+          </div>
+          <div class="col-md-4 mb-3">
+            <label>Apellidos</label>
+            <input id="apellidos" type="text" class="form-control" placeholder="Apellidos"
+            value="">
+          </div>
+          <div class="col-md-4 mb-3">
+            <label>Correo electr&oacute;nico</label>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text">@@</span>
+              </div>
+              <input id="correoElectronico" type="text" class="form-control" placeholder="Correo electr&oacute;nico">
+            </div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="col-md-4 mb-3">
+            <label>Ciudad</label>
+            <select id="provincia" class="form-control">
+              <option value="0">Seleccione</option>
+              <option value="1">San Jose</option>
+              <option value="2">Alajuela</option>
+              <option value="3">Cartago</option> 
+              <option value="4">Heredia</option>
+              <option value="5">Puntarenas</option>
+              <option value="6">Lim&oacute;n</option>
+              <option value="7">Guanacaste</option>                        
+            </select>
+          </div>
+          <div class="col-md-4 mb-3">
+            <label>Cant&oacute;n</label>
+            <select id="canton" class="form-control">
+              <option value="0">Seleccione</option>
+            </select>
+          </div>
+          <div class="col-md-4 mb-3">
+            <label>C&oacute;digo postal</label>
+            <input id="codigoPostal" type="text" class="form-control" placeholder="C&oacute;digo postal">
+          </div>
+          <div id="response"></div>
+        </div>
+        <div class="form-group">
+          <button id="submit" class="btn btn-primary" type="submit">Ingresar</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="container" id="table">
+
+    </div>
+
+    <script src="js/funciones.js"></script>
+
+
+    <script>
+    
+
+        $('document').ready(function () {
+
+            // Cargamos inicial la tabla con los datos actuales.
+            // obtenerCuentas();
+
+        });
+
+        // Validamos el cambio de provincia
+        $('#provincia').change(function (e) {
+            e.preventDefault();
+
+            // recuperamos el valor de la provincia
+            let codigoProvincia = $('#provincia').val();
+
+            // creamos el ajax necesario
+            // Enviamos a cargar la lista de cuentas que existan.
+            $.ajax({
+                url: "@Url.Action("buscarCantones", "Home")", // /Home/buscarCantones/", //
+                data: {
+                    codigoProvincia: codigoProvincia
+                },
+                type: "POST",
+                success: function(data){
+
+                    var listaCantones = data.listaCantones;
+                    var html = $('#canton');
+
+                    // Limpiamos el combo
+                    html.empty();
+
+                    // Creamos la opcion por defecto
+                    var option = document.createElement('option');
+                        option.textContent = "Seleccione un canton"
+                        html.append(option);
+
+
+                    listaCantones.forEach((canton, index) => {
+
+                        var option = document.createElement('option');
+                        option.value = canton.canton;
+                        option.textContent = canton.nombre;
+                        html.append(option);
+
+                    });
+                
+                },
+                error: function(error){
+
+                }
+               
+            });
+
+
+        });
+
+        $('#submit').click(function(e){
+
+            e.preventDefault();
+
+            guardarCuenta();
+            
+            obtenerCuentas();
+            
+        });
+
+        function guardarCuenta()
+        {
+
+
+
+            
+            $.ajax({
+                url: "@Url.Action("guardarCuenta", "Home")", // /Home/buscarCantones/", //
+                data: {
+                    
+                },
+                type: "POST",
+                success: function(data){
+
+                    var listaCantones = data.listaCantones;
+                    var html = $('#canton');
+
+                    // Limpiamos el combo
+                    html.empty();
+
+                    // Creamos la opcion por defecto
+                    var option = document.createElement('option');
+                        option.textContent = "Seleccione un canton"
+                        html.append(option);
+
+
+                    listaCantones.forEach((canton, index) => {
+
+                        var option = document.createElement('option');
+                        option.value = canton.canton;
+                        option.textContent = canton.nombre;
+                        html.append(option);
+
+                    });
+                
+                },
+                error: function(error){
+
+                }
+               
+            });
+
+
+        }
+
+
+        function obtenerCuentas()
+        {
+             $.ajax({
+                url: "@Url.Action("obtenerCuentas", "Home")", // /Home/buscarCantones/", //
+                type: "GET",
+                success: function(data){
+
+                    var listaCantones = data.listaCantones;
+                    var html = $('#canton');
+
+
+                    debugger
+                    // Creamos la opcion por defecto
+                    var option = document.createElement('option');
+                        option.textContent = "Seleccione un canton"
+                        html.append(option);
+
+
+                    listaCantones.forEach((canton, index) => {
+
+                        var option = document.createElement('option');
+                        option.value = canton.canton;
+                        option.textContent = canton.nombre;
+                        html.append(option);
+
+                    });
+                
+                },
+                error: function(error){
+
+                }
+               
+            });
+        }
+
+    </script>
