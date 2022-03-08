@@ -135,42 +135,26 @@
 
         function guardarCuenta()
         {
-
-
-
             
             $.ajax({
                 url: "@Url.Action("guardarCuenta", "Home")", // /Home/buscarCantones/", //
                 data: {
-                    
+                    nombre: $("#nombre").val() ,
+                    apellidos: $("#apellidos").val() ,
+                    correo: $("#correoElectronico").val() ,
+                    provincia: parseInt( $("#provincia").val() ),
+                    canton: parseInt( $("#canton").val() ),
+                    postal: parseInt( $("#codigoPostal").val() )
+
                 },
                 type: "POST",
                 success: function(data){
 
-                    var listaCantones = data.listaCantones;
-                    var html = $('#canton');
-
-                    // Limpiamos el combo
-                    html.empty();
-
-                    // Creamos la opcion por defecto
-                    var option = document.createElement('option');
-                        option.textContent = "Seleccione un canton"
-                        html.append(option);
-
-
-                    listaCantones.forEach((canton, index) => {
-
-                        var option = document.createElement('option');
-                        option.value = canton.canton;
-                        option.textContent = canton.nombre;
-                        html.append(option);
-
-                    });
+                    alert(data);
                 
                 },
                 error: function(error){
-
+                    alert(error)
                 }
                
             });
@@ -187,24 +171,24 @@
                 success: function(data){
 
                     var listaCantones = data.listaCantones;
-                    var html = $('#canton');
+                    var html = $('#table');
 
 
-                    debugger
+                    //debugger
                     // Creamos la opcion por defecto
-                    var option = document.createElement('option');
-                        option.textContent = "Seleccione un canton"
-                        html.append(option);
+                    //var option = document.createElement('option');
+                    //    option.textContent = "Seleccione un canton"
+                    //    html.append(option);
 
 
-                    listaCantones.forEach((canton, index) => {
+                    //listaCantones.forEach((canton, index) => {
 
-                        var option = document.createElement('option');
-                        option.value = canton.canton;
-                        option.textContent = canton.nombre;
-                        html.append(option);
+                    //    var option = document.createElement('option');
+                    //    option.value = canton.canton;
+                    //    option.textContent = canton.nombre;
+                    //    html.append(option);
 
-                    });
+                    //});
                 
                 },
                 error: function(error){

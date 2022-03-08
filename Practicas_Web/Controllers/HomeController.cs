@@ -66,5 +66,26 @@ namespace Practicas_Web.Controllers
 
             return Json(model);
         }
+
+
+        [HttpPost]
+        public IActionResult guardarCuenta(CuentaModel cuentaNueva)
+        {
+
+            if (ModelState.IsValid)
+            {
+
+                using (var context = new PracticaDbContext())
+                {
+                    context.Datos.Add(cuentaNueva);
+                    context.SaveChanges();
+                }
+
+            }
+
+
+            return Json("Datos Guardados");
+        }
+
     }
 }
