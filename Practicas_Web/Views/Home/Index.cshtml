@@ -82,7 +82,6 @@
             // recuperamos el valor de la provincia
             let codigoProvincia = $('#provincia').val();
 
-            // creamos el ajax necesario
             // Enviamos a cargar la lista de cuentas que existan.
             $.ajax({
                 url: "@Url.Action("buscarCantones", "Home")", // /Home/buscarCantones/", //
@@ -158,13 +157,12 @@
                 }
                
             });
-
-
         }
 
 
         function obtenerCuentas()
         {
+
              $.ajax({
                 url: "@Url.Action("obtenerCuentas", "Home")", // /Home/buscarCantones/", //
                 type: "GET",
@@ -194,7 +192,6 @@
                 error: function(error){
 
                 }
-               
             });
         }
 
