@@ -58,22 +58,33 @@
       </form>
     </div>
 
-    <div class="container" id="table">
+    <br/>
+    <hr />
 
+    <div class="container">
+        <table class="table table-striped" id="table">
+              <thead>
+                <tr>
+                  <th scope="col">Nombre</th>
+                  <th scope="col">Apellidos</th>
+                  <th scope="col">Correo</th>
+                  <th scope="col">Provincia</th>
+                  <th scope="col">Canton</th>
+                  <th scope="col">Codigo Postal</th>
+                </tr>
+              </thead>
+              <tbody id="tbody"></tbody>
+        </table>
     </div>
 
     <script src="js/funciones.js"></script>
 
-
     <script>
-    
 
-        $('document').ready(function () {
-
-            // Cargamos inicial la tabla con los datos actuales.
-            // obtenerCuentas();
-
+        $('document').ready(function() {
+            obtenerCuentas();
         });
+
 
         // Validamos el cambio de provincia
         $('#provincia').change(function (e) {
@@ -84,7 +95,7 @@
 
             // Enviamos a cargar la lista de cuentas que existan.
             $.ajax({
-                url: "@Url.Action("buscarCantones", "Home")", // /Home/buscarCantones/", //
+                url: "/Home/buscarCantones",//"@Url.Action("buscarCantones", "Home")", // /Home/buscarCantones/", //
                 data: {
                     codigoProvincia: codigoProvincia
                 },
@@ -118,25 +129,19 @@
                 }
                
             });
-
-
         });
 
         $('#submit').click(function(e){
-
             e.preventDefault();
-
+            //obtenerCuentas();
             guardarCuenta();
-            
-            obtenerCuentas();
             
         });
 
         function guardarCuenta()
         {
-            
             $.ajax({
-                url: "@Url.Action("guardarCuenta", "Home")", // /Home/buscarCantones/", //
+                url: "/Home/guardarCuenta", //"@Url.Action("guardarCuenta", "Home")", // /Home/buscarCantones/", //
                 data: {
                     nombre: $("#nombre").val() ,
                     apellidos: $("#apellidos").val() ,
@@ -148,8 +153,48 @@
                 },
                 type: "POST",
                 success: function(data){
+                    var listaCuentas = data.listaCuentas;
+                    var html = $('#tbody');
 
-                    alert(data);
+                    html.empty();
+
+                    var doc = document;
+
+                    var fragment = doc.createDocumentFragment();
+
+                    
+                    listaCuentas.forEach(function(datos, index){
+                        var tr = doc.createElement("tr");
+
+                        var td_nombre = doc.createElement("td");
+                        td_nombre.innerHTML = datos.nombre;
+                        tr.appendChild(td_nombre);
+
+                        var td_apellidos = doc.createElement("td");
+                        td_apellidos.innerHTML = datos.apellidos;
+                        tr.appendChild(td_apellidos);
+
+                        var td_correo = doc.createElement("td");
+                        td_correo.innerHTML = datos.correo;
+                        tr.appendChild(td_correo);
+
+                        var td_provincia = doc.createElement("td");
+                        td_provincia.innerHTML = datos.provincia;
+                        tr.appendChild(td_provincia);
+
+                        var td_canton = doc.createElement("td");
+                        td_canton.innerHTML = datos.canton;
+                        tr.appendChild(td_canton);
+
+                        var td_postal = doc.createElement("td");
+                        td_postal.innerHTML = datos.postal;
+                        tr.appendChild(td_postal);
+
+                        fragment.appendChild(tr);
+
+                    });
+
+                    html.append(fragment);
                 
                 },
                 error: function(error){
@@ -159,40 +204,57 @@
             });
         }
 
-
         function obtenerCuentas()
         {
-
              $.ajax({
-                url: "@Url.Action("obtenerCuentas", "Home")", // /Home/buscarCantones/", //
+                url: "/Home/obtenerCuentas", //"@Url.Action("obtenerCuentas", "Home")", 
                 type: "GET",
                 success: function(data){
+                    var listaCuentas = data.listaCuentas;
+                    var html = $('#tbody');
 
-                    var listaCantones = data.listaCantones;
-                    var html = $('#table');
+                    html.empty();
 
+                    var doc = document;
 
-                    //debugger
-                    // Creamos la opcion por defecto
-                    //var option = document.createElement('option');
-                    //    option.textContent = "Seleccione un canton"
-                    //    html.append(option);
+                    var fragment = doc.createDocumentFragment();
 
+                    
+                    listaCuentas.forEach(function(datos, index){
+                        var tr = doc.createElement("tr");
 
-                    //listaCantones.forEach((canton, index) => {
+                        var td_nombre = doc.createElement("td");
+                        td_nombre.innerHTML = datos.nombre;
+                        tr.appendChild(td_nombre);
 
-                    //    var option = document.createElement('option');
-                    //    option.value = canton.canton;
-                    //    option.textContent = canton.nombre;
-                    //    html.append(option);
+                        var td_apellidos = doc.createElement("td");
+                        td_apellidos.innerHTML = datos.apellidos;
+                        tr.appendChild(td_apellidos);
 
-                    //});
-                
+                        var td_correo = doc.createElement("td");
+                        td_correo.innerHTML = datos.correo;
+                        tr.appendChild(td_correo);
+
+                        var td_provincia = doc.createElement("td");
+                        td_provincia.innerHTML = datos.provincia;
+                        tr.appendChild(td_provincia);
+
+                        var td_canton = doc.createElement("td");
+                        td_canton.innerHTML = datos.canton;
+                        tr.appendChild(td_canton);
+
+                        var td_postal = doc.createElement("td");
+                        td_postal.innerHTML = datos.postal;
+                        tr.appendChild(td_postal);
+
+                        fragment.appendChild(tr);
+
+                    });
+
+                    html.append(fragment);
+
                 },
                 error: function(error){
-
-                }
-            });
+                }});
         }
-
     </script>

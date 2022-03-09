@@ -1,6 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.SqlServer;
-using Microsoft.EntityFrameworkCore.Sqlite;
 using Practicas_Web.Models;
 
 namespace Practicas_Web.Data
@@ -13,20 +11,6 @@ namespace Practicas_Web.Data
         {
 
         }
-
-
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) 
-        //{
-
-
-        //    optionsBuilder.UseMySQL(
-        //        "");
-
-        //    //optionsBuilder.UseSqlServer();
-
-        //    //optionsBuilder.UseSqlite();
-        //}
-
 
         public DbSet<CantonesModel> Canton { get; set; }
         public DbSet<CuentaModel> Datos { get; set; }

@@ -9,10 +9,14 @@ namespace Practicas_Web.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IConfiguration _configuration;
+        private readonly PracticaDbContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger,
+            PracticaDbContext dbContext)
         {
             _logger = logger;
+            _context = dbContext;
         }
 
         public IActionResult Index()
@@ -37,12 +41,11 @@ namespace Practicas_Web.Controllers
 
             var _model = new CuentaViewModel();
 
-            using(var context = new PracticaDbContext())
-            {
-                var listaCuentas = context.Datos.ToList();
+           
+            var listaCuentas = _context.Datos.ToList();
 
-                _model.listaCuentas = listaCuentas;
-            }
+            _model.listaCuentas = listaCuentas;
+           
 
             return _model;
         }
@@ -54,14 +57,9 @@ namespace Practicas_Web.Controllers
 
             if(ModelState.IsValid)
             {
-
-                using (var context  = new PracticaDbContext())
-                {
-                    model.listaCantones = context.Canton
-                                    .Where(a => a.provincia == Convert.ToInt32(provincia.codigoProvincia))
-                                    .ToList();
-                }
-
+                model.listaCantones = _context.Canton
+                                .Where(a => a.provincia == Convert.ToInt32(provincia.codigoProvincia))
+                                .ToList();
             }
 
             return Json(model);
@@ -71,20 +69,19 @@ namespace Practicas_Web.Controllers
         [HttpPost]
         public IActionResult guardarCuenta(CuentaModel cuentaNueva)
         {
+            var _model = new CuentaViewModel();
 
             if (ModelState.IsValid)
             {
+                _context.Datos.Add(cuentaNueva);
+                _context.SaveChanges();
 
-                using (var context = new PracticaDbContext())
-                {
-                    context.Datos.Add(cuentaNueva);
-                    context.SaveChanges();
-                }
+                var listaCuentas = _context.Datos.ToList();
 
+                _model.listaCuentas = listaCuentas;
             }
 
-
-            return Json("Datos Guardados");
+            return Json(_model);
         }
 
     }

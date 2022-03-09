@@ -2507,23 +2507,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\jcartin\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\Jose Cartin\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\jcartin\\Documents\\practicas\\practicas_desarrollo_web\\Practicas_Web\\Practicas_Web.csproj",
+      "projectUniqueName": "C:\\Users\\Jose Cartin\\Documents\\practicas_desarrollo_web\\Practicas_Web\\Practicas_Web.csproj",
       "projectName": "Practicas_Web",
-      "projectPath": "C:\\Users\\jcartin\\Documents\\practicas\\practicas_desarrollo_web\\Practicas_Web\\Practicas_Web.csproj",
-      "packagesPath": "C:\\Users\\jcartin\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\jcartin\\Documents\\practicas\\practicas_desarrollo_web\\Practicas_Web\\obj\\",
+      "projectPath": "C:\\Users\\Jose Cartin\\Documents\\practicas_desarrollo_web\\Practicas_Web\\Practicas_Web.csproj",
+      "packagesPath": "C:\\Users\\Jose Cartin\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Jose Cartin\\Documents\\practicas_desarrollo_web\\Practicas_Web\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "C:\\Users\\jcartin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Jose Cartin\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -2531,8 +2527,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "https://api.nuget.org/v3/index.json": {},
-        "https://gmgnuget.azurewebsites.net/nuget": {}
+        "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net6.0": {
@@ -2585,7 +2580,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.200\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
       }
     }
   }
